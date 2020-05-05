@@ -1,0 +1,23 @@
+{
+  "name": "gotouchioyatsu",
+  "version": "1.0.0",
+  "description": "ご当地おやつダーツ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizuki-kisa/gotouchi-oyatsu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mizuki-kisa/gotouchi-oyatsu/issues"
+  },
+  "homepage": "https://github.com/mizuki-kisa/gotouchi-oyatsu#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

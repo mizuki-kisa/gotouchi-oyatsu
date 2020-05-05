@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>ご当地おやつダーツ</title>
+    <link href="style.css" rel="stylesheet">
+    <meta property="og:image" content="img/ogp.png" />
+  </head>
+  <body>
+    <h1>ご当地おやつダーツ</h1>
+    <h2>ご当地おやつでティータイムを充実させよう！</h2>
+    <p>自粛生活をもっと楽しく過ごすために、美味しいおやつを入手しよう！ご当地おやつダーツは、47都道府県のご当地おやつをランダムに紹介するよ。</p>
+
+    <a class="button" onclick="start()">ダーツを投げる</a>
+
+    <div id="app">
+        <h1>オススメのご当地おやつは「{{ttl}}」！！！</h1>
+        <img v-bind:src='img' alt='画像'>
+        <p>{{desc}}</p>
+        <a class='button' v-bind:href="url"></a>
+    </div>
+    <a class="button" src="/">もう一度挑戦</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    
+    function start(){
+        var num = Math.round(Math.round(Math.random()*100)/100*47);
+
+        const getTodoufuken = async function (num){
+            const response = await axios.get('todoufuken.json')
+            console.log(response.data.prefectures[num]);
+        }
+
+        var result = getTodoufuken(num);
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            ttl:'タイトル',
+            desc:'説明文',
+            url:'#',
+            img:'img/default.png'
+        },
+
+        methods: {
+            getData: async function(){
+                //const response = await axios.get('https://launchlibrary.net/1.3/launch/next/30')
+                //console.log(response.data.launches);
+
+            },
+        },
+
+        mounted: function(){
+            this.getData();
+        }
+    })
+
+    </script>
+  </body>
+</html>

@@ -1,1 +1,51 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #FFFFF2;
+  background:#41D3BD;
+}
+.wrapper{
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+}
+
+.button{
+  display: block;
+  padding: 20px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  background: #DE6449;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+img{
+  margin: auto;
+  display: block;
+}
+
+h1{
+  font-size: 3em;
+  text-align: center;
+}
+
+h3{
+  text-align: center;
+  font-size: 2em;
+}
+
+.social{
+  display: flex;
+  justify-content: center;
+}
+
+.social img{
+  width:50px;
+  height: auto;
+  margin: 20px;
+}

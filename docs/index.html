@@ -5,21 +5,34 @@
     <meta property="og:image" content="img/ogp.png" />
   </head>
   <body>
+      <div class="wrapper">
     <h1>ご当地おやつダーツ</h1>
     <h2>ご当地おやつでティータイムを充実させよう！</h2>
     <p>自粛生活をもっと楽しく過ごすために、美味しいおやつを入手しよう！ご当地おやつダーツは、47都道府県のご当地おやつをランダムに紹介するよ。</p>
-    
+    <img src="img/darts.png">
     <div id="app">
-    <a class="button" v-on:click="start()">ダーツを投げる</a>
-
-        <h1>オススメのご当地おやつは「{{ttl}}」！！！</h1>
-        <h2>{{prefecture}}</h2>
+        <div id='result' v-bind:style="{display:display}">
+        <h3>{{prefecture}}</h3>
+        <h4>オススメのご当地おやつは<br>「{{ttl}}」</h4>
+        
         <img v-bind:src='img' alt='画像'>
         <p>{{desc}}</p>
-        <a class='button' v-bind:href="url"></a>
-    </div>
-    <a class="button" src="/">もう一度挑戦</a>
+        <a class='button' v-bind:href="url" target="_blank">お店にいく</a>
+        <h3>結果をシェアする</h3>
+        <div class="social">
+            <a v-bind:href="sharetxt" rel="nofollow" target="_blank">
+                <img src="img/Twitter_Social_Icon_Circle_White.png">
+            </a>
+            <a><img src="img/f_logo_RGB-White_114.png"></a>
+            
+        </div>
+        <p style="text-align: center;">もう一度やってみる...？</p>
+        </div>
 
+        <a class="button" v-on:click="start()">ダーツを投げる</a>
+
+    </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -32,28 +45,43 @@
             url:'#',
             img:'img/default.png',
             prefecture: '',
+            shop:'店',
+            display:'none',
+            sharetxt:'ご当地おやつダーツに挑戦しました！',
         },
 
         methods: {
-            
             getData: async function(){
-                //onst rakutenAPiurl = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword=";
-                //const rakutenAppId = '1072247679527739240';
-                //const genreId = '551167';
-                var keyword = this.prefecture;
-                const responseR = await axios.get('https://launchlibrary.net/1.3/launch/next/30')
-                console.log(responseR.data.launches);
-
             },
+        
             start: function(event){
                 var num = Math.round(Math.round(Math.random()*100)/100*47);
-                
+                var _this = this;
                 async function getTodoufuken (num){
+                    //都道府県を選択
                     const response = await axios.get('todoufuken.json');
-                    this.prefecture = getTodoufuken(num);
-                    console.log(this.prefecture);
+                    _this.prefecture = response.data.prefectures[num].name;
+                    console.log(_this.prefecture);
+
+                    //楽天API
+                    const rakutenAPiurl = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword=";
+                    const rakutenAppId = '1072247679527739240';
+                    const genreId = '551167';
+
+                    const responseR = await axios.get('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword='+encodeURIComponent(_this.prefecture)+'&genreId='+ genreId +'&applicationId='+ rakutenAppId);
+                    console.log(responseR.data.Items[0]);
+
+                    _this.ttl = responseR.data.Items[0].Item.itemName;
+                    _this.desc = responseR.data.Items[0].Item.itemCaption;
+                    _this.url = responseR.data.Items[0].Item.itemUrl;
+                    _this.img = responseR.data.Items[0].Item.mediumImageUrls[0].imageUrl;
+                    _this.shop = responseR.data.Items[0].Item.shopName;
+                    _this.sharetxt ='http://twitter.com/share?text='+encodeURIComponent( _this.sharetxt + '【' + _this.prefecture + '】'+ _this.desc.slice(0,30))+'&url=https://mizuki-kisa.github.io/gotouchi-oyatsu&hashtags=gotouchioyatsu';
+                    _this.display = 'block';
                 }
                 getTodoufuken(num);
+                
+               
                 }
         },
 

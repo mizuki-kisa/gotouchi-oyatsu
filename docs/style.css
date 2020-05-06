@@ -1,15 +1,24 @@
+@charset "UTF-8";
 body {
-  font: 100% Helvetica, sans-serif;
+  font: 100% Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", Verdana, "メイリオ", Meiryo, sans-serif;
   color: #FFFFF2;
-  background:#41D3BD;
+  background: #41D3BD;
+  letter-spacing: 0.2em;
+  line-height: 2em;
 }
-.wrapper{
+
+body a {
+  color: #ecff4d;
+  text-decoration: none;
+}
+
+body .wrapper {
   max-width: 960px;
   margin: auto;
   padding: 20px;
 }
 
-.button{
+body .wrapper .button {
   display: block;
   padding: 20px;
   margin: 20px auto;
@@ -20,32 +29,73 @@ body {
   text-align: center;
   font-size: 1.2em;
   text-decoration: none;
-  color: #ffffff;
+  color: #FFFFF2;
   cursor: pointer;
 }
 
-img{
+body .wrapper img {
   margin: auto;
   display: block;
 }
 
-h1{
+body .wrapper img#main {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+body .wrapper h1 {
   font-size: 3em;
   text-align: center;
 }
 
-h3{
+body .wrapper h3 {
   text-align: center;
   font-size: 2em;
+  line-height: 1.5em;
 }
 
-.social{
+body .wrapper h4 {
+  font-size: 1.5em;
+  color: #ecff4d;
+}
+
+@media screen and (min-width: 480px) {
+  body .wrapper .twocolmn {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  body .wrapper .twocolmn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+}
+
+body .wrapper .twocolmn img {
+  width: 360px;
+  margin-left: 60px;
+}
+
+body .wrapper #result img {
+  width: 100%;
+  max-width: 600px;
+}
+
+body .wrapper #result .social {
   display: flex;
   justify-content: center;
 }
 
-.social img{
-  width:50px;
+body .wrapper #result .social img {
+  width: 60px;
   height: auto;
   margin: 20px;
+}
+
+body footer {
+  padding: 60px 0;
+  text-align: center;
 }

@@ -1,0 +1,81 @@
+$primary-color: #41D3BD
+$sub-color: #DE6449
+$white-color: #FFFFF2
+$sub2-color: #ecff4d
+$font: Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", Verdana, "メイリオ", Meiryo, sans-serif
+
+body
+    font: 100% $font
+    color: $white-color
+    background: $primary-color
+    letter-spacing: 0.2em
+    line-height: 2em
+    a
+        color: $sub2-color
+        text-decoration: none
+    .wrapper
+        max-width: 960px
+        margin: auto
+        padding: 20px
+        .button
+            display: block
+            padding: 20px
+            margin: 20px auto
+            width: 100%
+            max-width: 400px
+            background: $sub-color
+            border-radius: 20px
+            text-align: center
+            font-size: 1.2em
+            text-decoration: none
+            color: $white-color
+            cursor: pointer
+
+        img
+            margin: auto
+            display: block
+            &#main
+                width: 100%
+                max-width: 400px
+                margin-bottom: 40px
+        h1
+            font-size: 3em
+            text-align: center
+        
+        h2
+
+        h3
+            text-align: center
+            font-size: 2em
+            line-height: 1.5em
+        
+        h4
+            font-size: 1.5em
+            color: $sub2-color
+        
+        .twocolmn
+            @media screen and (min-width:480px)
+                display: block
+
+            @media screen and (min-width:1024px)
+                display: flex
+                align-items: center
+                margin-bottom: 40px                
+            
+            img
+                width: 360px
+                margin-left: 60px
+        #result
+            img
+                width: 100%
+                max-width: 600px
+            .social
+                display: flex
+                justify-content: center
+                img
+                    width: 60px
+                    height: auto
+                    margin: 20px
+    footer
+        padding: 60px 0
+        text-align: center

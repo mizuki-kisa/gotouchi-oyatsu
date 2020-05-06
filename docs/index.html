@@ -1,29 +1,44 @@
 <html>
   <head>
     <title>ご当地おやつダーツ</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="style.min.css" rel="stylesheet">
     <meta property="og:image" content="img/ogp.png" />
+    <meta name="viewport" content="width=device-width">
+
+    <meta property="og:title" content="ご当地おやつダーツ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mizuki-kisa.github.io/gotouchi-oyatsu/">
+    <meta property="og:image" content="https://mizuki-kisa.github.io/gotouchi-oyatsu/img/ogp.jpg">
+
+    <meta property="og:site_name" content="サイト名">
+    <meta property="og:description" content="ディスクリプション">
+
   </head>
   <body>
       <div class="wrapper">
-    <h1>ご当地おやつダーツ</h1>
-    <h2>ご当地おやつでティータイムを充実させよう！</h2>
-    <p>自粛生活をもっと楽しく過ごすために、美味しいおやつを入手しよう！ご当地おやつダーツは、47都道府県のご当地おやつをランダムに紹介するよ。</p>
-    <img src="img/darts.png">
+    <img src="img/main.png" alt="ご当地おやつダーツ" id="main">
+    
+    <div class="twocolmn">
+        <div><h2>ご当地おやつでティータイムを充実させよう！</h2>
+            <p>自粛生活をもっと楽しく過ごすために、美味しいおやつを入手しよう！ご当地おやつダーツは、47都道府県のご当地おやつをランダムに紹介するよ。</p>
+        </div>
+        
+        <img src="img/pic.png">
+
+    </div>
+    
     <div id="app">
         <div id='result' v-bind:style="{display:display}">
-        <h3>{{prefecture}}</h3>
-        <h4>オススメのご当地おやつは<br>「{{ttl}}」</h4>
+        <h3>おすすめのご当地おやつは<br>{{prefecture}}</h3>
+        <h4>{{ttl}}</h4>
         
         <img v-bind:src='img' alt='画像'>
-        <p>{{desc}}</p>
         <a class='button' v-bind:href="url" target="_blank">お店にいく</a>
         <h3>結果をシェアする</h3>
         <div class="social">
             <a v-bind:href="sharetxt" rel="nofollow" target="_blank">
                 <img src="img/Twitter_Social_Icon_Circle_White.png">
             </a>
-            <a><img src="img/f_logo_RGB-White_114.png"></a>
             
         </div>
         <p style="text-align: center;">もう一度やってみる...？</p>
@@ -33,6 +48,9 @@
 
     </div>
     </div>
+    <footer>
+        つくった人: <a href="https://twitter.com/hedgehog_noodl" target="_blank">@hedgehog_noodl</a>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -47,7 +65,7 @@
             prefecture: '',
             shop:'店',
             display:'none',
-            sharetxt:'ご当地おやつダーツに挑戦しました！',
+            sharetxt:'ご当地おやつダーツに挑戦しました！おすすめのおやつは、',
         },
 
         methods: {
@@ -73,10 +91,10 @@
 
                     _this.ttl = responseR.data.Items[0].Item.itemName;
                     _this.desc = responseR.data.Items[0].Item.itemCaption;
-                    _this.url = responseR.data.Items[0].Item.itemUrl;
-                    _this.img = responseR.data.Items[0].Item.mediumImageUrls[0].imageUrl;
+                    _this.url = "http://hb.afl.rakuten.co.jp/hgc/1b73c858.befb3fed.1b73c859.7cb0479e/?pc="+ encodeURIComponent(responseR.data.Items[0].Item.itemUrl);
+                    _this.img = (responseR.data.Items[0].Item.mediumImageUrls[0].imageUrl).replace( /128x128/g , "600x600" ) ;;
                     _this.shop = responseR.data.Items[0].Item.shopName;
-                    _this.sharetxt ='http://twitter.com/share?text='+encodeURIComponent( _this.sharetxt + '【' + _this.prefecture + '】'+ _this.desc.slice(0,30))+'&url=https://mizuki-kisa.github.io/gotouchi-oyatsu&hashtags=gotouchioyatsu';
+                    _this.sharetxt ='http://twitter.com/share?text='+encodeURIComponent( _this.sharetxt + '【' + _this.prefecture + '】'+ _this.ttl.slice(0,30))+'&url=https://mizuki-kisa.github.io/gotouchi-oyatsu&hashtags='+encodeURIComponent('ご当地おやつダーツ,コロナに負けるな');
                     _this.display = 'block';
                 }
                 getTodoufuken(num);

@@ -36,7 +36,7 @@
         <h3>おすすめのご当地おやつは<br>{{prefecture}}</h3>
         <h4>{{ttl}}</h4>
         
-        <img v-bind:src='img' alt='画像'>
+        <img id="thum" v-bind:src='img' alt='画像'>
         <a class='button' v-bind:href="url" target="_blank">お店にいく</a>
         <h3>結果をシェアする</h3>
         <div class="social">
@@ -78,6 +78,8 @@
         
             start: function(event){
                 var num = Math.round(Math.round(Math.random()*100)/100*47);
+                var num2 = Math.round(Math.round(Math.random()*100)/100*30);
+                //console.log(num2);
                 var _this = this;
                 async function getTodoufuken (num){
                     //都道府県を選択
@@ -91,13 +93,13 @@
                     const genreId = '551167';
 
                     const responseR = await axios.get('https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword='+encodeURIComponent(_this.prefecture)+'&genreId='+ genreId +'&applicationId='+ rakutenAppId);
-                    console.log(responseR.data.Items[0]);
+                    //console.log(responseR.data);
 
-                    _this.ttl = responseR.data.Items[0].Item.itemName;
-                    _this.desc = responseR.data.Items[0].Item.itemCaption;
-                    _this.url = "http://hb.afl.rakuten.co.jp/hgc/1b73c858.befb3fed.1b73c859.7cb0479e/?pc="+ encodeURIComponent(responseR.data.Items[0].Item.itemUrl);
-                    _this.img = (responseR.data.Items[0].Item.mediumImageUrls[0].imageUrl).replace( /128x128/g , "600x600" ) ;;
-                    _this.shop = responseR.data.Items[0].Item.shopName;
+                    _this.ttl = responseR.data.Items[num2].Item.itemName;
+                    _this.desc = responseR.data.Items[num2].Item.itemCaption;
+                    _this.url = "http://hb.afl.rakuten.co.jp/hgc/1b73c858.befb3fed.1b73c859.7cb0479e/?pc="+ encodeURIComponent(responseR.data.Items[num2].Item.itemUrl);
+                    _this.img = (responseR.data.Items[num2].Item.mediumImageUrls[0].imageUrl).replace( /128x128/g , "600x600" ) ;;
+                    _this.shop = responseR.data.Items[num2].Item.shopName;
                     _this.sharetxt ='http://twitter.com/share?text='+encodeURIComponent('【' + _this.prefecture + '】'+ _this.ttl.slice(0,30))+'&url=https://mizuki-kisa.github.io/gotouchi-oyatsu&hashtags='+encodeURIComponent('ご当地おやつダーツ,コロナに負けるな');
                     _this.display = 'block';
                 }

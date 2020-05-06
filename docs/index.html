@@ -98,6 +98,7 @@
                     _this.url = "http://hb.afl.rakuten.co.jp/hgc/1b73c858.befb3fed.1b73c859.7cb0479e/?pc="+ encodeURIComponent(responseR.data.Items[0].Item.itemUrl);
                     _this.img = (responseR.data.Items[0].Item.mediumImageUrls[0].imageUrl).replace( /128x128/g , "600x600" ) ;;
                     _this.shop = responseR.data.Items[0].Item.shopName;
+                    _this.sharetxt ='';
                     _this.sharetxt ='http://twitter.com/share?text='+encodeURIComponent( _this.sharetxt + '【' + _this.prefecture + '】'+ _this.ttl.slice(0,30))+'&url=https://mizuki-kisa.github.io/gotouchi-oyatsu&hashtags='+encodeURIComponent('ご当地おやつダーツ,コロナに負けるな');
                     _this.display = 'block';
                 }
